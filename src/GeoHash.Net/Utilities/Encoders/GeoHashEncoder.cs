@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using GeoHash.Net.Models.GeoCoords;
 using GeoHash.Net.Utilities.Enums;
@@ -92,7 +93,7 @@ namespace GeoHash.Net.Utilities.Encoders
 
         public IEnumerable<KeyValuePair<string, string>> Encode(IEnumerable<KeyValuePair<string, IGeoCoordinate>> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12)
         {
-            foreach (var geoCoord in geoCoords)
+            foreach (var geoCoord in geoCoords.AsParallel())
             {
                 yield return new KeyValuePair<string, string>(geoCoord.Key, Encode(geoCoord.Value, precision));
             }
@@ -100,7 +101,7 @@ namespace GeoHash.Net.Utilities.Encoders
 
         public IEnumerable<string> Encode(IEnumerable<IGeoCoordinate> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12)
         {
-            foreach (var geoCoord in geoCoords)
+            foreach (var geoCoord in geoCoords.AsParallel())
             {
                 yield return Encode(geoCoord);
             }

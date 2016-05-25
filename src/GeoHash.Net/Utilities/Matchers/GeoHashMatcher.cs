@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GeoHash.Net.Models.GeoCoords;
 using GeoHash.Net.Utilities.Encoders;
 using GeoHash.Net.Utilities.Enums;
@@ -58,7 +59,7 @@ namespace GeoHash.Net.Utilities.Matchers
 
             source = source.Substring(0, (int)precision);
 
-            foreach (var comparer in comparers)
+            foreach (var comparer in comparers.AsParallel())
             {
                 if (IsMatch(source, comparer, precision))
                     yield return comparer;
@@ -72,7 +73,7 @@ namespace GeoHash.Net.Utilities.Matchers
 
             source = source.Substring(0, (int) precision);
 
-            foreach (var comparer in comparers)
+            foreach (var comparer in comparers.AsParallel())
             {
                 if (IsMatch(source, comparer.Value, precision))
                     yield return comparer;
