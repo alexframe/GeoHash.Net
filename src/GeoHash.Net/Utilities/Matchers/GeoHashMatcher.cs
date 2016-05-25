@@ -40,7 +40,14 @@ namespace GeoHash.Net.Utilities.Matchers
             if (source.Length < 1 || source.Length > 12 || comparer.Length < 1 || comparer.Length > 12)
                 throw new ArgumentOutOfRangeException($"{nameof(source)} and {nameof(comparer)} must have a length between 1 and 12.");
 
-            source = source.Substring(0, (int)precision);
+
+            /* 
+             * If the source length is greater than the precision, we'll truncate it
+             * so that we can do a "StartsWith" to determine if it's a match.
+             */
+            if (source.Length > (int)precision)
+                source = source.Substring(0, (int)precision);
+
             return comparer.StartsWith(source);
         }
 
@@ -48,6 +55,8 @@ namespace GeoHash.Net.Utilities.Matchers
         {
             if (comparers == null)
                 throw new ArgumentNullException($"{nameof(comparers)} cannot be null.");
+
+            source = source.Substring(0, (int)precision);
 
             foreach (var comparer in comparers)
             {
@@ -58,8 +67,10 @@ namespace GeoHash.Net.Utilities.Matchers
 
         public IEnumerable<KeyValuePair<string, string>> GetMatches(string source, IEnumerable<KeyValuePair<string, string>> comparers, GeoHashPrecision precision)
         {
-            if(comparers==null)
+            if (comparers == null)
                 throw new ArgumentNullException($"{nameof(comparers)} cannot be null.");
+
+            source = source.Substring(0, (int) precision);
 
             foreach (var comparer in comparers)
             {
