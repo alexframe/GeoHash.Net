@@ -1,8 +1,7 @@
-{
+﻿{
   "version": "1.0.0-*",
 
   "dependencies": {
-    "GeoHash.Net.Models": "1.0.0-*",
     "NETStandard.Library": "1.5.0-rc2-24027"
   },
 
