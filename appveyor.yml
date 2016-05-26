@@ -16,7 +16,7 @@ build:
 
 after_build:
   - ps: >-
-    dotnet pack /src/GeoHash.Net --no-build -c Release
+    dotnet pack '/src/GeoHash.Net' --no-build -c Release
 
 artifacts:
   - path: '**\*.nupkg' 
