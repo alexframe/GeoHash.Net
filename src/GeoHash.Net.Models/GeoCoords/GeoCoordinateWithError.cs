@@ -30,7 +30,7 @@
 
         public override int GetHashCode()
         {
-            return Latitude.GetHashCode() ^ Longitude.GetHashCode() & LatitudeError.GetHashCode() & LongitudeError.GetHashCode();
+            return Latitude.GetHashCode() ^ Longitude.GetHashCode() ^ LatitudeError.GetHashCode() ^ LongitudeError.GetHashCode();
         }
 
         private bool Equals(GeoCoordinateWithError other)
