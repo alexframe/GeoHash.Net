@@ -16,7 +16,7 @@ build:
 
 after_build:
 - ps: >-
-    dotnet pack 'src/GeoHash.Net' --no-build -c Release --version-suffix {build}
+    dotnet pack 'src/GeoHash.Net' --no-build -c Release --version-suffix %APPVEYOR_BUILD_VERSION%
 
 artifacts:
 - path: 'src/GeoHash/bin/Release/*.nupkg' 
