@@ -19,7 +19,7 @@ after_build:
     dotnet pack 'src/GeoHash.Net' --no-build -c $Env:CONFIGURATION --version-suffix $Env:APPVEYOR_BUILD_NUMBER
 
 artifacts:
-- path: 'src/GeoHash/bin/$Env:CONFIGURATION/*.nupkg' 
+- path: 'src/**/*.nupkg' 
   name: Nuget
 
 test_script:
