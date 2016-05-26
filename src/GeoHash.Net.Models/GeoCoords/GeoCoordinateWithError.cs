@@ -2,24 +2,20 @@
 {
     public struct GeoCoordinateWithError
     {
+        public double Latitude { get; }
 
-        private readonly double _latitude;
-        private readonly double _longitude;
-        private readonly double _latitudeError;
-        private readonly double _longitudeError;
+        public double Longitude { get; }
 
-        public double Latitude => _latitude;
-        public double Longitude => _longitude;
+        public double LatitudeError { get; }
 
-        public double LatitudeError => _longitudeError;
-        public double LongitudeError => _latitudeError;
+        public double LongitudeError { get; }
 
         public GeoCoordinateWithError(double latitude, double longitude, double latitudeError, double longitudeError)
         {
-            _latitude = latitude;
-            _longitude = longitude;
-            _latitudeError = latitudeError;
-            _longitudeError = longitudeError;
+            Latitude = latitude;
+            Longitude = longitude;
+            LongitudeError = latitudeError;
+            LatitudeError = longitudeError;
         }
 
         public override string ToString()
@@ -39,8 +35,10 @@
 
         private bool Equals(GeoCoordinateWithError other)
         {
-            return Latitude.Equals(other.Latitude) && Longitude.Equals(other.Longitude)
-                && LatitudeError.Equals(other.LatitudeError) && LongitudeError.Equals(other.LongitudeError);
+            return Latitude.Equals(other.Latitude) 
+                && Longitude.Equals(other.Longitude)
+                && LatitudeError.Equals(other.LatitudeError) 
+                && LongitudeError.Equals(other.LongitudeError);
         }
     }
 }
