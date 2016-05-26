@@ -2,21 +2,19 @@
 {
     public struct GeoCoordinate
     {
-        private readonly double _latitude;
-        private readonly double _longitude;
+        public double Latitude { get; }
 
-        public double Latitude => _latitude;
-        public double Longitude => _longitude;
+        public double Longitude { get; }
 
         public GeoCoordinate(double latitude, double longitude)
         {
-            _latitude = latitude;
-            _longitude = longitude;
+            Latitude = latitude;
+            Longitude = longitude;
         }
 
         public override string ToString()
         {
-            return string.Format("{0},{1}", Latitude, Longitude);
+            return $"{Latitude},{Longitude}";
         }
 
         public override bool Equals(object other)
@@ -31,7 +29,8 @@
 
         private bool Equals(GeoCoordinate other)
         {
-            return Latitude.Equals(other.Latitude) && Longitude.Equals(other.Longitude);
+            return Latitude.Equals(other.Latitude) 
+                && Longitude.Equals(other.Longitude);
         }
     }
 }
