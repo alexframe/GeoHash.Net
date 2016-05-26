@@ -1,4 +1,4 @@
-﻿namespace GeoHash.Net.Models.GeoCoords
+﻿namespace GeoHash.Net.GeoCoords
 {
     public struct GeoCoordinate
     {

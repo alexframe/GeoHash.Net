@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GeoHash.Net.Models.GeoCoords;
+using GeoHash.Net.GeoCoords;
 using GeoHash.Net.Utilities.Encoders;
 using GeoHash.Net.Utilities.Enums;
 

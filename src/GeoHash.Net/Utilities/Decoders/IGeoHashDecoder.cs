@@ -1,5 +1,5 @@
 ﻿using System;
-using GeoHash.Net.Models.GeoCoords;
+using GeoHash.Net.GeoCoords;
 
 namespace GeoHash.Net.Utilities.Decoders
 {

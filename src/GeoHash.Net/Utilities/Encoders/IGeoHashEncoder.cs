@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GeoHash.Net.Models.GeoCoords;
+using GeoHash.Net.GeoCoords;
 using GeoHash.Net.Utilities.Enums;
 
 namespace GeoHash.Net.Utilities.Encoders
