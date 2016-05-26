@@ -1,6 +1,6 @@
 os: Visual Studio 2015
 
-version: 0.0.1.{build}
+version: 0.0.1-{branch}-{build}
 
 install:
 - dotnet restore
@@ -19,7 +19,7 @@ after_build:
     dotnet pack 'src/GeoHash.Net' --no-build -c $Env:CONFIGURATION --version-suffix $Env:APPVEYOR_BUILD_NUMBER
 
 artifacts:
-- path: 'src/**/*.nupkg' 
+- path: 'src/GeoHash.Net/**/*.nupkg' 
   name: Nuget
 
 test_script:
