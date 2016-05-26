@@ -13,8 +13,5 @@
       }
     },
     "net451": { }
-  },
-  "scripts": {
-    "postcompile": [ "dotnet pack %project:Directory% --no-build -c Release" ] // TODO: Upgrade this to use postbuild when that actually gets hit.
   }
 }

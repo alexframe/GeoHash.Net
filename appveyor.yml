@@ -14,6 +14,10 @@ build:
   include_nuget_references: true
   verbosity: minimal
 
+after_build:
+- ps: >-
+    dotnet pack $(appveyor_build_folder) --no-build -c Release
+
 artifacts:
 - path: '**\*.nupkg' 
   name: Nuget
