@@ -14,8 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeoHash.Net", "src\GeoHash.Net\GeoHash.Net.xproj", "{7F132C2A-A719-4DB3-9ADF-5849669979E1}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeoHash.Net.Models", "src\GeoHash.Net.Models\GeoHash.Net.Models.xproj", "{D8A0C9E8-6688-468F-9C34-83DFC4859906}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,16 +24,11 @@ Global
 		{7F132C2A-A719-4DB3-9ADF-5849669979E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F132C2A-A719-4DB3-9ADF-5849669979E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F132C2A-A719-4DB3-9ADF-5849669979E1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D8A0C9E8-6688-468F-9C34-83DFC4859906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D8A0C9E8-6688-468F-9C34-83DFC4859906}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D8A0C9E8-6688-468F-9C34-83DFC4859906}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D8A0C9E8-6688-468F-9C34-83DFC4859906}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7F132C2A-A719-4DB3-9ADF-5849669979E1} = {110F05C8-2621-4CB4-9C6B-8A4086718A1E}
-		{D8A0C9E8-6688-468F-9C34-83DFC4859906} = {110F05C8-2621-4CB4-9C6B-8A4086718A1E}
 	EndGlobalSection
 EndGlobal

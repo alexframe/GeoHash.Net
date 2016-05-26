@@ -2,7 +2,6 @@
   "version": "0.0.1-*",
 
   "dependencies": {
-    "GeoHash.Net.Models": "0.0.1-*",
     "NETStandard.Library": "1.5.0-rc2-24027"
   },
 
@@ -16,6 +15,6 @@
     "net451": { }
   },
   "scripts": {
-    "postcompile": [ "dotnet pack %project:Directory% --no-build" ] // TODO: Upgrade this to use postbuild when that actually gets hit.
+    "postcompile": [ "dotnet pack %project:Directory% --no-build -c Release" ] // TODO: Upgrade this to use postbuild when that actually gets hit.
   }
 }

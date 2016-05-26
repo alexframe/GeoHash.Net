@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeoHash.Net.Models.GeoCoords;
+using GeoHash.Net.GeoCoords;
 using GeoHash.Net.Utilities.Decoders;
 using GeoHash.Net.Utilities.Encoders;
 using GeoHash.Net.Utilities.Enums;

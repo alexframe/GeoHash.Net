@@ -1,1 +1,1 @@
-### GeoHash.Net ###
+# GeoHash.Net ![Alt](https://ci.appveyor.com/api/projects/status/github/alexframe/geohash.net?branch=master&svg=true&retina=true "Build status")

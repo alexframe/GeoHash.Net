@@ -1,6 +1,6 @@
-﻿namespace GeoHash.Net.Models.GeoCoords
+﻿namespace GeoHash.Net.GeoCoords
 {
-    public struct GeoCoordinateWithError
+    internal struct GeoCoordinateWithError
     {
         public double Latitude { get; }
 
