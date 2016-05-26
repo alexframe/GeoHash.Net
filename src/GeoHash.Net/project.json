@@ -14,5 +14,8 @@
       }
     },
     "net451": { }
+  },
+  "scripts": {
+    "postcompile": [ "dotnet pack %project:Directory% --no-build" ] // TODO: Upgrade this to use postbuild when that actually gets hit.
   }
 }
