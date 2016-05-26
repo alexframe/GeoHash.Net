@@ -8,10 +8,10 @@ namespace GeoHash.Net.Utilities.Encoders
     {
         string Encode(double latitude, double longitude, GeoHashPrecision precision = GeoHashPrecision.Level12);
 
-        string Encode(IGeoCoordinate geoCoord, GeoHashPrecision precision = GeoHashPrecision.Level12);
+        string Encode(GeoCoordinate geoCoord, GeoHashPrecision precision = GeoHashPrecision.Level12);
 
-        IEnumerable<KeyValuePair<string, string>> Encode(IEnumerable<KeyValuePair<string, IGeoCoordinate>> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12);
+        IEnumerable<KeyValuePair<string, string>> Encode(IEnumerable<KeyValuePair<string, GeoCoordinate>> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12);
 
-        IEnumerable<string> Encode(IEnumerable<IGeoCoordinate> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12);
+        IEnumerable<string> Encode(IEnumerable<GeoCoordinate> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12);
     }
 }

@@ -19,7 +19,7 @@ namespace GeoHash.Net.Utilities.Matchers
             _encoder = encoder;
         }
 
-        public bool IsMatch(IGeoCoordinate source, IGeoCoordinate comparer, GeoHashPrecision precision)
+        public bool IsMatch(GeoCoordinate source, GeoCoordinate comparer, GeoHashPrecision precision)
         {
             var sourceGeoHash = _encoder.Encode(source);
             var comparerGeoHash = _encoder.Encode(comparer);
