@@ -9,7 +9,7 @@ namespace GeoHash.Net.Tests
         [Fact]
         public void Test()
         {
-            Assert.Equal(1, 1);
+            Assert.Equal(1, 2);
         }
     }
 }
