@@ -2,7 +2,7 @@
   "version": "0.0.1-*",
 
   "dependencies": {
-    "GeoHash.Net.Models": "1.0.0-*",
+    "GeoHash.Net.Models": "0.0.1-*",
     "NETStandard.Library": "1.5.0-rc2-24027"
   },
 
