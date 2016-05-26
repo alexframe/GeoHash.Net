@@ -18,7 +18,7 @@ namespace GeoHash.Net.Utilities.Decoders
             _decodeMap = decodeMap;
         }
 
-        public IGeoCoordinate Decode(string geoHash)
+        public GeoCoordinate Decode(string geoHash)
         {
             var decodedCoords = DecodeExactly(geoHash);
 
@@ -28,11 +28,7 @@ namespace GeoHash.Net.Utilities.Decoders
             var lat = GetPrecision(decodedCoords.Latitude, latPrecision);
             var lng = GetPrecision(decodedCoords.Longitude, lngPrecision);
 
-            return new GeoCoordinate
-            {
-                Latitude = lat,
-                Longitude = lng
-            };
+            return new GeoCoordinate(lat, lng);
         }
 
         public Tuple<double, double> DecodeAsTuple(string geoHash)
@@ -41,7 +37,7 @@ namespace GeoHash.Net.Utilities.Decoders
             return Tuple.Create(decoded.Latitude, decoded.Longitude);
         }
 
-        private IGeoCoordinateWithError DecodeExactly(string geohash)
+        private GeoCoordinateWithError DecodeExactly(string geohash)
         {
             double latMin = -90, latMax = 90;
             double lngMin = -180, lngMax = 180;
@@ -90,13 +86,7 @@ namespace GeoHash.Net.Utilities.Decoders
             var latitude = (latMin + latMax) / 2;
             var longitude = (lngMin + lngMax) / 2;
 
-            return new GeoCoordinateWithError
-            {
-                Latitude = latitude,
-                Longitude = longitude,
-                LatitudeError = latErr,
-                LongitudeError = lngError
-            };
+            return new GeoCoordinateWithError(latitude, longitude, latErr, lngError);
         }
 
         private static double GetPrecision(double x, double precision)

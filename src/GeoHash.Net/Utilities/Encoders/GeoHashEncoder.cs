@@ -83,15 +83,12 @@ namespace GeoHash.Net.Utilities.Encoders
             return geoHash.ToString();
         }
 
-        public string Encode(IGeoCoordinate geoCoord, GeoHashPrecision precision = GeoHashPrecision.Level12)
+        public string Encode(GeoCoordinate geoCoord, GeoHashPrecision precision = GeoHashPrecision.Level12)
         {
-            if (geoCoord == null)
-                throw new ArgumentNullException($"{nameof(geoCoord)} cannot be null.");
-
             return Encode(geoCoord.Latitude, geoCoord.Longitude, precision);
         }
 
-        public IEnumerable<KeyValuePair<string, string>> Encode(IEnumerable<KeyValuePair<string, IGeoCoordinate>> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12)
+        public IEnumerable<KeyValuePair<string, string>> Encode(IEnumerable<KeyValuePair<string, GeoCoordinate>> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12)
         {
             foreach (var geoCoord in geoCoords.AsParallel())
             {
@@ -99,7 +96,7 @@ namespace GeoHash.Net.Utilities.Encoders
             }
         }
 
-        public IEnumerable<string> Encode(IEnumerable<IGeoCoordinate> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12)
+        public IEnumerable<string> Encode(IEnumerable<GeoCoordinate> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12)
         {
             foreach (var geoCoord in geoCoords.AsParallel())
             {

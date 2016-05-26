@@ -5,7 +5,7 @@ namespace GeoHash.Net.Utilities.Decoders
 {
     public interface IGeoHashDecoder
     {
-        IGeoCoordinate Decode(string geoHash);
+        GeoCoordinate Decode(string geoHash);
         Tuple<double, double> DecodeAsTuple(string geoHash);
     }
 }

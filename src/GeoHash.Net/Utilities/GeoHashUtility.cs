@@ -28,22 +28,22 @@ namespace GeoHash.Net.Utilities
             return _encoder.Encode(latitude, longitude, precision);
         }
 
-        public string Encode(IGeoCoordinate geoCoord, GeoHashPrecision precision = GeoHashPrecision.Level12)
+        public string Encode(GeoCoordinate geoCoord, GeoHashPrecision precision = GeoHashPrecision.Level12)
         {
             return _encoder.Encode(geoCoord, precision);
         }
 
-        public IEnumerable<KeyValuePair<string, string>> Encode(IEnumerable<KeyValuePair<string, IGeoCoordinate>> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12)
+        public IEnumerable<KeyValuePair<string, string>> Encode(IEnumerable<KeyValuePair<string, GeoCoordinate>> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12)
         {
             return _encoder.Encode(geoCoords, precision);
         }
 
-        public IEnumerable<string> Encode(IEnumerable<IGeoCoordinate> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12)
+        public IEnumerable<string> Encode(IEnumerable<GeoCoordinate> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12)
         {
             return _encoder.Encode(geoCoords);
         }
 
-        public IGeoCoordinate Decode(string geoHash)
+        public GeoCoordinate Decode(string geoHash)
         {
             return _decoder.Decode(geoHash);
         }
@@ -53,7 +53,7 @@ namespace GeoHash.Net.Utilities
             return _decoder.DecodeAsTuple(geoHash);
         }
 
-        public bool IsMatch(IGeoCoordinate source, IGeoCoordinate comparer, GeoHashPrecision precision)
+        public bool IsMatch(GeoCoordinate source, GeoCoordinate comparer, GeoHashPrecision precision)
         {
             return _matcher.IsMatch(source, comparer, precision);
         }

@@ -6,7 +6,7 @@ namespace GeoHash.Net.Utilities.Matchers
 {
     public interface IGeoHashMatcher
     {
-        bool IsMatch(IGeoCoordinate source, IGeoCoordinate comparer, GeoHashPrecision precision);
+        bool IsMatch(GeoCoordinate source, GeoCoordinate comparer, GeoHashPrecision precision);
 
         bool IsMatch(string source, string comparer, GeoHashPrecision precision);
 
