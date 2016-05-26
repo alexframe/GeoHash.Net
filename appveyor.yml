@@ -3,7 +3,7 @@ os: Visual Studio 2015
 version: 0.0.{build}
 
 install:
-- dotnet restore
+  - dotnet restore
 
 configuration: Release
 platform: Any CPU
@@ -15,9 +15,9 @@ build:
   verbosity: minimal
 
 after_build:
-- ps: >-
-    dotnet pack $(appveyor_build_folder)\src\GeoHash.Net\ --no-build -c Release
+  - ps: >-
+    dotnet pack /src/GeoHash.Net --no-build -c Release
 
 artifacts:
-- path: '**\*.nupkg' 
-  name: Nuget
+  - path: '**\*.nupkg' 
+    name: Nuget
