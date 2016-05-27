@@ -43,6 +43,11 @@ namespace GeoHash.Net.Utilities
             return _encoder.Encode(geoCoords);
         }
 
+        public IDictionary<string, string> Encode(IDictionary<string, GeoCoordinate> geoCoords, GeoHashPrecision precision = GeoHashPrecision.Level12)
+        {
+            return _encoder.Encode(geoCoords, precision);
+        }
+
         public GeoCoordinate Decode(string geoHash)
         {
             return _decoder.Decode(geoHash);

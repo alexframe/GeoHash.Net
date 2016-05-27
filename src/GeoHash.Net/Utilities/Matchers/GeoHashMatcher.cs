@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GeoHash.Net.GeoCoords;
 using GeoHash.Net.Utilities.Encoders;
 using GeoHash.Net.Utilities.Enums;
@@ -38,18 +39,24 @@ namespace GeoHash.Net.Utilities.Matchers
             if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(comparer))
                 throw new ArgumentOutOfRangeException($"{nameof(source)} and {nameof(comparer)} cannot be null.");
 
-            if (source.Length < 1 || source.Length > 12 || comparer.Length < 1 || comparer.Length > 12)
-                throw new ArgumentOutOfRangeException($"{nameof(source)} and {nameof(comparer)} must have a length between 1 and 12.");
+            if (source.Length < (int) GeoHashPrecision.MinimumPrecision
+                || source.Length > (int) GeoHashPrecision.MaximumPrecision
+                || comparer.Length < (int) GeoHashPrecision.MinimumPrecision
+                || comparer.Length > (int) GeoHashPrecision.MaximumPrecision)
+            {
+                throw new ArgumentOutOfRangeException(
+                    $"{nameof(source)} and {nameof(comparer)} must have a length between 1 and 12.");
+            }
 
 
             /* 
-             * If the source length is greater than the precision, we'll truncate it
+             * If the source length is greater than the precision, we'll truncate it 
              * so that we can do a "StartsWith" to determine if it's a match.
              */
             if (source.Length > (int)precision)
                 source = source.Substring(0, (int)precision);
 
-            return comparer.StartsWith(source);
+            return comparer.StartsWith(source, StringComparison.OrdinalIgnoreCase);
         }
 
         public IEnumerable<string> GetMatches(string source, IEnumerable<string> comparers, GeoHashPrecision precision)
@@ -59,11 +66,7 @@ namespace GeoHash.Net.Utilities.Matchers
 
             source = source.Substring(0, (int)precision);
 
-            foreach (var comparer in comparers.AsParallel())
-            {
-                if (IsMatch(source, comparer, precision))
-                    yield return comparer;
-            }
+            return comparers.AsParallel().Where(x => IsMatch(source, x, precision));
         }
 
         public IEnumerable<KeyValuePair<string, string>> GetMatches(string source, IEnumerable<KeyValuePair<string, string>> comparers, GeoHashPrecision precision)
@@ -71,13 +74,9 @@ namespace GeoHash.Net.Utilities.Matchers
             if (comparers == null)
                 throw new ArgumentNullException($"{nameof(comparers)} cannot be null.");
 
-            source = source.Substring(0, (int) precision);
+            source = source.Substring(0, (int)precision);
 
-            foreach (var comparer in comparers.AsParallel())
-            {
-                if (IsMatch(source, comparer.Value, precision))
-                    yield return comparer;
-            }
+            return comparers.AsParallel().Where(x => IsMatch(source, x.Value, precision));
         }
     }
 }
