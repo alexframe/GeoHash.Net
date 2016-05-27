@@ -1,35 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GeoHash.Net.GeoCoords;
 using GeoHash.Net.Utilities.Helpers;
 
 namespace GeoHash.Net.Utilities.Decoders
 {
-    public class GeoHashDecoder : IGeoHashDecoder
+    public class GeoHashDecoder<TKey> : BaseDecoder, IGeoHashDecoder<TKey>
     {
-        private readonly int[] _bits;
-        private readonly IReadOnlyDictionary<char, int> _decodeMap;
-
         public GeoHashDecoder() : this(GeoHashHelpers.GetBits(), GeoHashHelpers.GetDecodeMap()) { }
 
-        public GeoHashDecoder(int[] bits, IReadOnlyDictionary<char, int> decodeMap)
-        {
-            _bits = bits;
-            _decodeMap = decodeMap;
-        }
-
-        public GeoCoordinate Decode(string geoHash)
-        {
-            var decodedCoords = DecodeExactly(geoHash);
-
-            var latPrecision = Math.Max(1, Math.Round(-Math.Log10(decodedCoords.LatitudeError))) - 1;
-            var lngPrecision = Math.Max(1, Math.Round(-Math.Log10(decodedCoords.LongitudeError))) - 1;
-
-            var lat = GetPrecision(decodedCoords.Latitude, latPrecision);
-            var lng = GetPrecision(decodedCoords.Longitude, lngPrecision);
-
-            return new GeoCoordinate(lat, lng);
-        }
+        public GeoHashDecoder(int[] bits, IReadOnlyDictionary<char, int> decodeMap) : base(bits, decodeMap) { }
 
         public Tuple<double, double> DecodeAsTuple(string geoHash)
         {
@@ -37,63 +18,20 @@ namespace GeoHash.Net.Utilities.Decoders
             return Tuple.Create(decoded.Latitude, decoded.Longitude);
         }
 
-        private GeoCoordinateWithError DecodeExactly(string geohash)
+        public IEnumerable<GeoCoordinate> Decode(IEnumerable<string> geoHashes)
         {
-            double latMin = -90, latMax = 90;
-            double lngMin = -180, lngMax = 180;
-
-            var latErr = 90.0;
-            var lngError = 180.0;
-            var isEven = true;
-            var size = geohash.Length;
-            var bitsSize = _bits.Length;
-            for (var i = 0; i < size; i++)
-            {
-                var cd = _decodeMap[geohash[i]];
-
-                for (var j = 0; j < bitsSize; j++)
-                {
-                    var mask = _bits[j];
-                    if (isEven)
-                    {
-                        lngError /= 2;
-                        if ((cd & mask) != 0)
-                        {
-                            lngMin = (lngMin + lngMax) / 2;
-                        }
-                        else
-                        {
-                            lngMax = (lngMin + lngMax) / 2;
-                        }
-                    }
-                    else
-                    {
-                        latErr /= 2;
-
-                        if ((cd & mask) != 0)
-                        {
-                            latMin = (latMin + latMax) / 2;
-                        }
-                        else
-                        {
-                            latMax = (latMin + latMax) / 2;
-                        }
-                    }
-                    isEven = !isEven;
-                }
-            }
-
-            var latitude = (latMin + latMax) / 2;
-            var longitude = (lngMin + lngMax) / 2;
-
-            return new GeoCoordinateWithError(latitude, longitude, latErr, lngError);
+            return geoHashes.AsParallel().Select(Decode);
         }
 
-        private static double GetPrecision(double x, double precision)
+        public IEnumerable<KeyValuePair<TKey, GeoCoordinate>> Decode(IEnumerable<KeyValuePair<TKey, string>> geoHashes)
         {
-            var @base = Math.Pow(10, -precision);
-            var diff = x % @base;
-            return x - diff;
+            return geoHashes.AsParallel().Select(geoHash => new KeyValuePair<TKey, GeoCoordinate>(geoHash.Key, Decode(geoHash.Value)));
+        }
+
+        public IDictionary<TKey, GeoCoordinate> Decode(IDictionary<TKey, GeoCoordinate> geoHashes)
+        {
+            var kvp = geoHashes.Cast<KeyValuePair<TKey, string>>();
+            return Decode(kvp).ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }
