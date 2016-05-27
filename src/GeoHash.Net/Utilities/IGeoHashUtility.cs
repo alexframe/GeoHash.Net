@@ -4,5 +4,10 @@ using GeoHash.Net.Utilities.Matchers;
 
 namespace GeoHash.Net.Utilities
 {
-    public interface IGeoHashUtility : IGeoHashEncoder, IGeoHashDecoder, IGeoHashMatcher { }
+    public interface IGeoHashUtility<TKey>
+    {
+        IGeoHashEncoder<TKey> Encoder { get; }
+        IGeoHashDecoder<TKey> Decoder { get; }
+        IGeoHashMatcher<TKey> Matcher { get; }
+    }
 }

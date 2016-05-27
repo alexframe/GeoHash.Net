@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GeoHash.Net.GeoCoords;
 using GeoHash.Net.Utilities.Encoders;
 using GeoHash.Net.Utilities.Enums;
 
 namespace GeoHash.Net.Utilities.Matchers
 {
-    public class GeoHashMatcher : IGeoHashMatcher
+    public class GeoHashMatcher<TKey> : IGeoHashMatcher<TKey>
     {
-        private readonly IGeoHashEncoder _encoder;
+        private readonly IGeoHashEncoder<TKey> _encoder;
 
 
-        public GeoHashMatcher() : this(new GeoHashEncoder()) { }
+        public GeoHashMatcher() : this(new GeoHashEncoder<TKey>()) { }
 
-        public GeoHashMatcher(IGeoHashEncoder encoder)
+        public GeoHashMatcher(IGeoHashEncoder<TKey> encoder)
         {
             _encoder = encoder;
         }
@@ -69,7 +68,7 @@ namespace GeoHash.Net.Utilities.Matchers
             return comparers.AsParallel().Where(x => IsMatch(source, x, precision));
         }
 
-        public IEnumerable<KeyValuePair<string, string>> GetMatches(string source, IEnumerable<KeyValuePair<string, string>> comparers, GeoHashPrecision precision)
+        public IEnumerable<KeyValuePair<TKey, string>> GetMatches(string source, IEnumerable<KeyValuePair<TKey, string>> comparers, GeoHashPrecision precision)
         {
             if (comparers == null)
                 throw new ArgumentNullException($"{nameof(comparers)} cannot be null.");
