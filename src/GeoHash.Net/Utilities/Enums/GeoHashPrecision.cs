@@ -5,6 +5,11 @@
         /// <summary>
         /// ~ 5,004km x 5,004km
         /// </summary>
+        MinimumPrecision = Level1,
+
+        /// <summary>
+        /// ~ 5,004km x 5,004km
+        /// </summary>
         Level1 = 1,
 
         /// <summary>
@@ -60,6 +65,11 @@
         /// <summary>
         /// ~ 3.7cm x 1.8cm
         /// </summary>
-        Level12 = 12
+        Level12 = 12,
+
+        /// <summary>
+        /// ~ 3.7cm x 1.8cm
+        /// </summary>
+        MaximumPrecision = Level12
     }
 }
